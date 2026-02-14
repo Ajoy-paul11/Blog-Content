@@ -13,7 +13,7 @@ import postRoutes from "./routes/post.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 
 
-app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/admin", authRoutes);
 app.use("/api/v1/posts", postRoutes);
 
 export { app };

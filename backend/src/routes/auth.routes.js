@@ -1,18 +1,11 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
+import { adminSignup, adminLogin, verifyAdmin } from "../controllers/admin.controller.js";
+import auth from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/login", (req, res) => {
-    const { email, password } = req.body;
-
-    // prototype only
-    if (email === "admin@test.com" && password === "admin") {
-        const token = jwt.sign({ role: "admin" }, "secret", { expiresIn: "1h" });
-        return res.json({ token });
-    }
-
-    res.status(401).json({ message: "Invalid credentials" });
-});
+router.post("/admin/signup", adminSignup); // allow creating multiple admins
+router.post("/admin/login", adminLogin);
+router.get("/verify", auth, verifyAdmin);
 
 export default router;

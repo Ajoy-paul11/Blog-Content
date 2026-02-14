@@ -38,11 +38,11 @@ export const adminLogin = async (req, res) => {
     }
 };
 
-// verify token - route should use auth.middleware so req.user is present
+
 export const verifyAdmin = async (req, res) => {
     try {
-        const user = req.user; // from auth.middleware (id, email, role)
-        // optionally fetch fresh admin record (without password)
+        const user = req.user;
+
         const admin = await Admin.findById(user.id).select("-password");
         if (!admin) return res.status(401).json({ message: "Invalid token" });
         return res.json({ valid: true, admin });

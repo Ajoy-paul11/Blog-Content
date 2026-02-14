@@ -14,7 +14,7 @@ const router = Router();
 router.get("/getallposts", getAllPosts);
 router.get("/getpost/:id", getPostById);
 
-// admin restricted
+
 router.post("/createpost", auth, isAdmin, createPost);
 router.put("/updatepost/:id", auth, isAdmin, updatePostById);
 router.delete("/deletepost/:id", auth, isAdmin, deletePostById);

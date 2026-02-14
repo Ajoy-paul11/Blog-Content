@@ -5,24 +5,24 @@ const SALT_ROUNDS = 10;
 
 const adminSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    password: { type: String, required: true }, // hashed
+    password: { type: String, required: true },
     name: { type: String, default: "Admin" },
-    role: { type: String, default: "admin" }, // keep for clarity
+    role: { type: String, default: "admin" },
 }, { timestamps: true });
 
-// hash password before saving
-adminSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
+
+adminSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+
     try {
         const hash = await bcrypt.hash(this.password, SALT_ROUNDS);
         this.password = hash;
-        next();
     } catch (err) {
-        next(err);
+        throw err;
     }
 });
 
-// helper to compare plain password
+
 adminSchema.methods.comparePassword = function (plain) {
     return bcrypt.compare(plain, this.password);
 };

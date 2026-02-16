@@ -25,9 +25,9 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 w-full">
       <Navbar />
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 w-full">
         <h1 className="text-4xl font-bold text-gray-800 mb-8">Latest Posts</h1>
 
         {loading && <div className="text-center text-xl">Loading posts...</div>}
